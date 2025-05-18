@@ -1,71 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:meu_app/screens/feed_screen.dart';
+import 'screens/login_screen.dart';
+import 'screens/new_denuncia.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return NewWidget();
-  }
-}
-
-class NewWidget extends StatelessWidget {
-  const NewWidget({
-    super.key,
-  });
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Meu Primeiro App",
+      title: 'App de Denúncias',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        useMaterial3: true,
+        colorSchemeSeed: Colors.teal,
       ),
-      home: HomeScreen(),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  void _mostrarMensagem(BuildContext context, String mensagem) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(mensagem)),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Tela Inicial'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Bem-vindo ao meu app!',
-              style: TextStyle(fontSize: 24),
-            ),
-            SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () {
-                _mostrarMensagem(context, 'Você clicou no botão 1');
-              },
-              child: Text('Botão 1'),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                _mostrarMensagem(context, 'Você clicou no botão 2');
-              },
-              child: Text('Botão 2'),
-            ),
-          ],
-        ),
-      ),
+      home: const LoginScreen(),
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/feed': (context) => const FeedScreen(),
+        '/new': (context) => const NewDenunciaScreen(),
+      },
     );
   }
 }
